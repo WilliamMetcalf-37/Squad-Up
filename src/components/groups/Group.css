@@ -1,0 +1,11 @@
+.mygroup{
+  border: 1px solid goldenrod;
+  padding: 2px;
+  max-width: 30%;
+}
+.currentUser{
+  color: blue
+}
+.individualUser{
+  border-top: 1px solid goldenrod
+}

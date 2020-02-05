@@ -1,0 +1,10 @@
+.myEvent{
+  border: 1px solid goldenrod;
+  padding: 2px;
+  max-width: 30%;
+}
+.events{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
