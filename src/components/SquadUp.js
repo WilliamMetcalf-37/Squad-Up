@@ -4,6 +4,9 @@ import ApplicationViews from "./ApplicationViews"
 import NavBar from "./nav/NavBar"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import { GroupProvider } from "./groups/GroupProvider"
+import { UserProvider } from "./users/UserProvider"
+import { UserGroupProvider } from "./groups/UserGroupProvider"
 
 export default () => (
     <>
@@ -20,7 +23,18 @@ export default () => (
             }
         }} />
 
-        <Route path="/login" render={props => <Login {...props} />} />
+
+<GroupProvider>
+<UserProvider>
+<UserGroupProvider>
+    <Route path="/login" render={props => <Login {...props} />} />
         <Route path="/register" render={props => <Register {...props} />} />
+</UserGroupProvider>    
+</UserProvider>
+</GroupProvider>
+          
+
+
+        
     </>
 )

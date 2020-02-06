@@ -1,10 +1,20 @@
-// Authored by Holden Parker
-import React, { useRef } from "react"
+
+import React, { useRef, useContext } from "react"
 import { Link } from "react-router-dom";
 import "./Login.css"
+import { UserGroupContext } from "../groups/UserGroupProvider";
+import { GroupContext } from "../groups/GroupProvider";
+import { UserContext } from "../users/UserProvider";
 
 
 const Login = props => {
+    const {userGroups} = useContext(UserGroupContext)
+    const {groups} = useContext(GroupContext)
+    const {users}  = useContext(UserContext)
+
+
+
+
     const username= useRef()
     const password = useRef()
     const firstName = useRef()
@@ -22,6 +32,7 @@ const Login = props => {
     }
 
     const handleLogin = (e) => {
+        
         e.preventDefault()
 
         existingUserCheck()
@@ -42,12 +53,31 @@ const Login = props => {
                             password: password.current.value,
                             firstName: firstName.current.value,
                             lastName: lastName.current.value,
+                            groupLength:0
                         })
                     })
                         .then(_ => _.json())
                         .then(response => {
                             localStorage.setItem("activeUser", response.id)
                             props.history.push("/")
+
+                            const currentUser = parseInt(localStorage.getItem("activeUser"),10)
+                            let myGroups=[]
+                            userGroups.filter(rel=>{
+                                if(rel.userId===currentUser){
+                                  myGroups.push(rel.group)
+                                }
+                              })
+
+                                groups.filter(gru => {
+                                  if (currentUser === gru.groupLeaderId) {
+                                    myGroups.push(gru)
+                                  }
+                                })
+
+
+
+
                         })
                 }
             })

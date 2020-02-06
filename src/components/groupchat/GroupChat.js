@@ -1,15 +1,23 @@
-import React from "react"
+import React, { useContext } from "react"
+import { GroupChatContext } from "./GroupChatProvider"
 
 
 
+export default ({ message,history, match}) => {
+  const {deleteGroupChat}=useContext(GroupChatContext)
 
-export default ({ message}) => {
 const activeUser = parseInt(localStorage.getItem("activeUser"))
   const currentUserFunction = ()=>{
-    if(activeUser===message.userId || activeUser===message.group.groupLeaderId){
+    if(activeUser===message.userId || activeUser===message.group.groupLeaderId && message.userId !== 1){
       return(<>
-      <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={()=>{
+        history.push(`/chat/create/${message.groupId}/edit/${message.id}`)
+      }}>Edit</button>
+      <button onClick={()=>{
+        deleteGroupChat(message).then(()=>{
+          history.push(`/chat/${match.params.groupId}`)
+        })
+      }}>Delete</button>
       </>)
     }
 

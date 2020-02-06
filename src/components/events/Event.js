@@ -1,12 +1,13 @@
 import React, { useContext } from "react"
 import "./Event.css"
 import { GroupContext } from "../groups/GroupProvider"
+import { GroupChatContext } from "../groupchat/GroupChatProvider"
 
 
 
 export default ({event, history})=>{
-const {addGroup} = useContext(GroupContext)
-
+const {addGroup, groups} = useContext(GroupContext)
+const {addGroupChat} = useContext(GroupChatContext)
 
 
 
@@ -40,7 +41,15 @@ return (
               artist: event.artistList[0].name,
               groupLeaderId: parseInt(localStorage.getItem("activeUser"),10)
             }
+
+            const firstChat = {
+              message:"Welcome to Chat Fam",
+              groupId: groups.length + 1,
+              userId: 1
+            }
 addGroup(newGroup).then(()=>{
+addGroupChat(firstChat)
+}).then(()=>{
   window.alert(`You have create a new group for ${event.name}`)
 })
             

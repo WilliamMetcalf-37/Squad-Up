@@ -10,6 +10,7 @@ import { UserProvider } from "./users/UserProvider";
 import { StatusProvider } from "./groups/StatusProvider"
 import GroupChatList from "./groupchat/GroupChatList";
 import GroupChatListSet from "./groupchat/GroupChatListSet";
+import ChatForm from "./groupchat/ChatForm";
 
 export default (props) => {
   return (
@@ -35,6 +36,17 @@ export default (props) => {
 
                   <Route exact path="/chat"
                     render={props => <GroupChatListSet {...props} />} />
+
+                  <Route exact path="/chat/create/:groupId(\d+)"
+                    render={props => <ChatForm {...props} />} />
+
+
+                  <Route exact path="/chat/create/:groupId(\d+)/edit/:chatId(\d+)"
+                    render={props => <ChatForm {...props} />} />
+
+                  
+
+
 
 
                 </GroupChatProvider>

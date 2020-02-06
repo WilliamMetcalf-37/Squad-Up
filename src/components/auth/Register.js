@@ -1,4 +1,4 @@
-// Authored by Holden Parker
+
 import React, { useRef } from "react"
 import "./Login.css"
 
@@ -35,7 +35,8 @@ const Register = props => {
                             username: username.current.value,
                             password: password.current.value,
                             firstName: firstName.current.value,
-                            lastName: lastName.current.value
+                            lastName: lastName.current.value,
+                            groupLength: 0
                         })
                     })
                         .then(_ => _.json())

@@ -1,57 +1,55 @@
 
 import React, { useContext, useState, useEffect } from "react"
+import { GroupChatContext } from "./GroupChatProvider"
 
 
 
 export default props => {
+    const {groupChats, addGroupChat, updateGroupChat} = useContext(GroupChatContext)
     
+    const editMode = props.match.params.hasOwnProperty("chatId")
     
-    const editMode = props.match.params.hasOwnProperty("taskId")
-    
-    const [task, setTask] = useState({})
+    const [chat, setChat] = useState({})
     const handleControlledInputChange = (event) => {
         /*
             When changing a state object or array, always create a new one
             and change state instead of modifying current one
         */
-        const newTask = Object.assign({}, task)
-        newTask[event.target.name] = event.target.value
-        setTask(newTask)
+        const newChat = Object.assign({}, chat)
+        newChat[event.target.name] = event.target.value
+        setChat(newChat)
     }
 
     const setDefaults = () => {
         if (editMode) {
-            const taskId = parseInt(props.match.params.taskId)
-            const selectedTask = tasks.find(t => t.id === taskId) || {}
-            setTask(selectedTask)
+            const chatId = parseInt(props.match.params.chatId)
+            const selectedChat = groupChats.find(c => c.id === chatId) || {}
+            setChat(selectedChat)
         }
     }
 
     useEffect(() => {
         setDefaults()
-    }, [tasks])
+    }, [groupChats])
 
-    const constructNewTask = () => {
-   
+    const constructNewMessage = () => {
             if (editMode) {
-                updateTask({ 
-                    id: task.id,
-                    name: task.name,
-                    task: task.task,
-                    dueDate: task.dateTime,
-                    isCompleted: false,
-                    userId: parseInt(localStorage.getItem("activeUser"))
+                updateGroupChat({ 
+                    id: chat.id,
+                    message: chat.message,
+                    groupId: chat.groupId,
+                    userId: chat.userId
                 })
-                    .then(() => props.history.push("/tasks"))
+                    .then(() => props.history.push(`/chat/${chat.groupId}`))
             } else {
-                addTask({
-                    name: task.name,
-                    task: task.task,
-                    dueDate: task.dateTime,
-                    isCompleted: false,
+                addGroupChat({
+                    message: chat.message,
+                    groupId:parseInt(props.match.params.groupId,10),
                     userId: parseInt(localStorage.getItem("activeUser"))
                 })
-                    .then(() => props.history.push("/tasks"))
+                    .then(() => {
+                        props.history.push(`/chat/${props.match.params.groupId}`)
+                    })
             }
 
         }
@@ -59,54 +57,41 @@ export default props => {
     
 
     return (
-        <form className="taskForm">
-            <h2 className="taskForm__title">{editMode ? "Update Task" : "Admit Task"}</h2>
+        <form className="messageForm">
+            <h2 className="messageForm__title">{editMode ? "Update Message" : "Write Message"}</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Task name: </label>
-                    <input type="text" name="name" required autoFocus className="form-control"
+                    <label htmlFor="name">message name: </label>
+                    <input type="text" name="message" required autoFocus className="form-control"
                         proptype="varchar"
-                        placeholder="Task name"
-                        defaultValue={task.name}
+                        placeholder="Write your message Here!"
+                        defaultValue={chat.message}
                         onChange={handleControlledInputChange}
                     />
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="task">Task: </label>
-                    <input type="text" name="task" required className="form-control"
-                        proptype="varchar"
-                        placeholder="Task"
-                        defaultValue={task.task}
-                        onChange={handleControlledInputChange}
+                <div className="form-group"> 
+                    <input type="hidden" name="groupId" className="form-control"
+                        proptype="int"
+                        defaultValue={chat.groupId}
                     />
                 </div>
             </fieldset>
-            
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="treatment">Date: </label>
-                    <input type="datetime-local" name="dateTime" className="form-control"
-                        proptype="varchar"
-                        value={task.dateTime}
-                        onChange={handleControlledInputChange}>
-                    </input>
-                </div>
-            </fieldset>
+           
 
             <button type="submit"
                 onClick={evt => {
-                    if(task.name === "" || task.task==="" || task.dateTime ===""){
+                    if(chat.message === ""){
                         window.alert("Please fill out all input fields")
                     }else{
                     evt.preventDefault()
-                    constructNewTask()
+                    constructNewMessage()
                     }
                     
                 }}
                 className="btn btn-primary">
-                {editMode ? "Save Updates" : "Create Task"}
+                {editMode ? "Save Updates" : "Create Message"}
             </button>
         </form>
     )
