@@ -14,8 +14,8 @@ export default ({ group, history }) => {
 
   let groupMembers = []
 
-
-  userGroups.filter(usg => {
+//filter to grab members of the specific group
+ userGroups.filter(usg => {
     if (group.id === usg.groupId) {
       groupMembers.push(usg.user)
     }
@@ -51,7 +51,7 @@ export default ({ group, history }) => {
           <div>{groupLeader.username}</div>
           <h3>Group Members</h3>
           {groupMembers.map(user => {
-            
+          const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
             return <>
               <div key={user.id} value={user.id} className="individualUser">{user.username}
                 <button onClick={props => {
@@ -61,6 +61,8 @@ export default ({ group, history }) => {
                   })
                 }}>Remove From Group
               </button>
+              <br></br>
+              {currentUserGroup.status.status}
               </div>
             </>
           })}
@@ -109,7 +111,7 @@ export default ({ group, history }) => {
     const newUserGroup = {
       groupId: group.id,
       userId: parseInt(event.target.value),
-      status: 1
+      statusId: 1
     }
     addUserGroup(newUserGroup).then(() => {
       history.push("/")
@@ -123,7 +125,7 @@ export default ({ group, history }) => {
     })
     const updateUserGroup = {
       id: thisuserGroup.id,
-      status: parseInt(event.target.value, 10)
+      statusId: parseInt(event.target.value, 10)
     }
     patchUserGroup(updateUserGroup)
   }

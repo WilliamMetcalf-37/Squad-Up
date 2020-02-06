@@ -8,8 +8,6 @@ export default (props) => {
   const { groups } = useContext(GroupContext)
   const { userGroups } = useContext(UserGroupContext)
   const currentUser = parseInt(localStorage.getItem("activeUser"), 10)
-
-
   const groupsILead = []
   const myGroups = []
 

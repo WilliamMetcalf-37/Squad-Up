@@ -1,0 +1,14 @@
+.groupchatcard{
+  border: 1px solid goldenrod;
+  padding: 2px;
+  max-width: 30%;
+}
+.messageCard{
+  border: 1px solid goldenrod;
+  padding: 2px;
+  max-width: 30%;
+}
+.currentGroup{
+  font-size: 24px;
+  font-weight: bold;
+}
