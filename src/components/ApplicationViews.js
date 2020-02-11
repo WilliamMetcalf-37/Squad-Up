@@ -15,6 +15,8 @@ import { DirectMessageProvider } from "./friends/DirectMessageProvider";
 import { FriendProvider } from "./friends/FriendProvider";
 import { FriendChatProvider } from "./friends/FriendChatProvider";
 import FriendList from "./friends/FriendList";
+import NotificationList from "./notifications/NotificationList";
+import { NotificationProvider } from "./notifications/NotificationProvider";
 
 export default (props) => {
   return (
@@ -28,34 +30,37 @@ export default (props) => {
                   <DirectMessageProvider>
                     <FriendProvider>
                       <FriendChatProvider>
+                        <NotificationProvider>
+
+                          <Route exact path="/"
+                            render={props => <GroupList {...props} />} />
+
+                          <Route path="/friends"
+                            render={props => <FriendList {...props} />} />
+
+                          <Route path="/notifications"
+                            render={props => <NotificationList {...props} />} />
 
 
-                        <Route exact path="/"
-                          render={props => <GroupList {...props} />} />
+                          <Route exact path="/events"
+                            render={props => <EventList {...props} />} />
 
-                        <Route path="/friends"
-                          render={props => <FriendList {...props} />} />
+                          <Route exact path="/chat/:groupId(\d+)"
+                            render={props => <GroupChatList {...props} />} />
 
+                          <Route exact path="/chat"
+                            render={props => <GroupChatListSet {...props} />} />
 
-                        <Route exact path="/events"
-                          render={props => <EventList {...props} />} />
-
-                        <Route exact path="/chat/:groupId(\d+)"
-                          render={props => <GroupChatList {...props} />} />
-
-                        <Route exact path="/chat"
-                          render={props => <GroupChatListSet {...props} />} />
-
-                        <Route exact path="/chat/create/:groupId(\d+)"
-                          render={props => <ChatForm {...props} />} />
+                          <Route exact path="/chat/create/:groupId(\d+)"
+                            render={props => <ChatForm {...props} />} />
 
 
-                        <Route exact path="/chat/create/:groupId(\d+)/edit/:chatId(\d+)"
-                          render={props => <ChatForm {...props} />} />
+                          <Route exact path="/chat/create/:groupId(\d+)/edit/:chatId(\d+)"
+                            render={props => <ChatForm {...props} />} />
 
 
 
-
+                        </NotificationProvider>
                       </FriendChatProvider>
                     </FriendProvider>
                   </DirectMessageProvider>
