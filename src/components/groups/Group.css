@@ -1,6 +1,7 @@
 .mygroup{
   border: 1px solid goldenrod;
   padding: 2px;
+  margin: 5px;
   max-width: 30%;
 }
 .currentUser{
@@ -8,4 +9,11 @@
 }
 .individualUser{
   border-top: 1px solid goldenrod
+}
+.groupsList{
+  display: flex;
+  flex-direction: column;
+}
+.groupsILead, .groupsImIn{
+  display: flex;
 }

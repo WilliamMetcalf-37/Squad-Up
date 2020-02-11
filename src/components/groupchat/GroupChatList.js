@@ -8,6 +8,7 @@ import "./GroupChat.css"
 
 export default (props) => {
   const { groupChats } = useContext(GroupChatContext)
+  
 
 
   const currentGroupId = props.match.params.groupId
@@ -15,6 +16,9 @@ export default (props) => {
 
   if (currentGroupId) {
     const filteredGroupChats = groupChats.filter(chat => chat.groupId === parseInt(currentGroupId, 10)) || []
+
+
+
 
     const foundGroup = groupChats.find(chat => chat.groupId === parseInt(currentGroupId, 10)) || {}
 

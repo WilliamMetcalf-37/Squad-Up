@@ -12,15 +12,15 @@ export default (props) => {
 
     return (
         <ul className="navbar">
-            <li className="navbar__item navbar__link">
-                Welcome!
-            </li>
             <li className="navbar__item">
                 <NavLink to="/" {...props}>Home</NavLink>    
             </li>
+            <li className="navbar__item">
+                <NavLink to="/friends" {...props}>Friends</NavLink>
+            </li>
 
             <li className="navbar__item">
-                <NavLink to="/events" {...props}>Events</NavLink> 
+                <NavLink to="/events" {...props}>Events by EDM Train</NavLink> 
             </li>
             <li className="navbar__item">
                 <NavLink to="/chat" {...props}>Chat</NavLink> 

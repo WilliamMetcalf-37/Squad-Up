@@ -25,21 +25,20 @@ groups.filter(gru => {
     }
   })
 const user = users.find(use=> use.id === currentUser) || {}
-console.log(user)
+
 
 
 allTheGroups = myGroups.concat(groupsILead)
-console.log("myGro", myGroups)
-console.log("lead", groupsILead)
-console.log("allthe", allTheGroups.length)
 
 if(allTheGroups.length > user.groupLength){
 const patchTheUser = {
   id:currentUser,
   groupLength: allTheGroups.length
 }
-patchUser(patchTheUser)
-    window.alert("You have been added to a new group!")
+patchUser(patchTheUser).then(()=>{
+  window.confirm("You have been added to a new group!")
+})
+    
 
 
 }
@@ -56,15 +55,14 @@ patchUser(patchTheUser)
       <div className="groupsList">
 
         <div className="groupsILead">
-          <h2>Groups I Put Together</h2>
-          {
-            groupsILead.map(group => {
-              return <Group key={group.id} group={group} {...props} />
-            })
-          }
+          <h2>Squads I Put Together</h2>
+          {groupsILead.map(group => {
+                return <Group key={group.id} group={group} {...props} />
+              })
+            }
         </div>
         <div className="groupsImIn">
-          <h2>my Groups</h2>
+          <h2>My Squads</h2>
           {
             myGroups.map(group => {
               return <Group key={group.id} group={group} {...props} />

@@ -2,12 +2,14 @@ import React, { useContext } from "react"
 import "./Event.css"
 import { GroupContext } from "../groups/GroupProvider"
 import { GroupChatContext } from "../groupchat/GroupChatProvider"
+import { UserContext } from "../users/UserProvider"
 
 
 
 export default ({event, history})=>{
 const {addGroup, groups} = useContext(GroupContext)
 const {addGroupChat} = useContext(GroupChatContext)
+const {users, patchUser}= useContext(UserContext)
 
 
 
@@ -48,6 +50,15 @@ return (
               userId: 1
             }
 addGroup(newGroup).then(()=>{
+const foundUser = users.find(user => user.id === parseInt(localStorage.getItem("activeUser"),10))
+
+
+
+  const patchTheUser = {
+    id: parseInt(localStorage.getItem("activeUser"),10),
+    groupLength: foundUser.groupLength + 1
+  }
+  patchUser(patchTheUser)
 addGroupChat(firstChat)
 }).then(()=>{
   window.alert(`You have create a new group for ${event.name}`)
@@ -56,7 +67,7 @@ addGroupChat(firstChat)
 
 
 
-          }}>Create Group</button>
+          }}>Create Squad</button>
         </section>
 )
 }

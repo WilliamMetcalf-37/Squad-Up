@@ -12,6 +12,7 @@ export default ({ group, history }) => {
   const { userGroups, addUserGroup, deleteUserGroup, patchUserGroup } = useContext(UserGroupContext)
 
 
+
   let groupMembers = []
 
 //filter to grab members of the specific group
@@ -25,12 +26,16 @@ export default ({ group, history }) => {
   let nonMembersArray = []
   users.filter(user => {
     if (user.id !== parseInt(localStorage.getItem("activeUser"), 10)) {
+      if(user.id !== 1){
+
+      
       const userInGroup = groupMembers.find(friend => friend.id === user.id) || null
       if (userInGroup === null) {
         nonMembersArray.push(user)
 
       }
     }
+  }
   })
 
 
@@ -43,13 +48,13 @@ export default ({ group, history }) => {
         <>
           <select className="dropdown" id="userDropdown" name="select"
             onChange={addMemberToGroup}>
-            <option value="0">Add Friends to Group</option>
+            <option value="0">Add Friends to Squad</option>
             {nonMembersArray.map(user => <option key={user.id} value={user.id}>{user.username}</option>)}
 
           </select>
-          <h3>Group Leader</h3>
+          <h3>Squad Leader</h3>
           <div>{groupLeader.username}</div>
-          <h3>Group Members</h3>
+          <h3>Squad Members</h3>
           {groupMembers.map(user => {
           const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
             return <>
@@ -59,7 +64,7 @@ export default ({ group, history }) => {
                   deleteUserGroup(currentUserGroup).then(() => {
                     history.push("/")
                   })
-                }}>Remove From Group
+                }}>Remove From Squad
               </button>
               <br></br>
               {currentUserGroup.status.status}
@@ -133,6 +138,7 @@ export default ({ group, history }) => {
   const groupLeader = users.find(user => group.groupLeaderId === user.id)
   return (
     <section className="mygroup">
+
       <h3 className="group__name">{group.name}</h3>
       <div className="group__artist">{group.artist}</div>
       <div className="group__time">{group.date}</div>

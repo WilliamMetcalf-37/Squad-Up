@@ -46,7 +46,6 @@ export const GroupChatProvider = (props) => {
     }, [])
 
     useEffect(() => {
-      console.log(groupChats)
     }, [groupChats])
 
     return (
