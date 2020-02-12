@@ -11,6 +11,7 @@ const usersNotifications = notifications.filter(not=> not.activeUserId === parse
 
 return (
   <>
+  <h1>Notifications</h1>
   {
     usersNotifications.map(not => <Notification key={not.id} notification={not}    {...props}/>)
   }

@@ -6,10 +6,11 @@ import Login from "./auth/Login"
 import Register from "./auth/Register"
 
 import { NotificationProvider } from "./notifications/NotificationProvider"
+import ProviderProvider from "./ProviderProvider"
 
 export default () => (
     <>
-    <NotificationProvider>
+    <ProviderProvider>
 
         <Route render={() => {
             if (localStorage.getItem("activeUser")) {
@@ -32,8 +33,8 @@ export default () => (
         <Route path="/register" render={props => <Register {...props} />} />
 
           
-
-        </NotificationProvider>
+</ProviderProvider>
+  
         
     </>
 )

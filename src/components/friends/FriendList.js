@@ -12,7 +12,6 @@ friends.filter(friend =>{
     usersFriendsArray.push(friend)
   }
 })
-console.log("friendArray", usersFriendsArray)
 
     
 
@@ -20,7 +19,7 @@ console.log("friendArray", usersFriendsArray)
       <>
       <div className="FriendsList">
           <div>
-              <h1>Friends</h1>
+              <h2>Friends</h2>
           </div>    
         
           <div className="Friends">

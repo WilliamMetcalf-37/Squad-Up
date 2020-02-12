@@ -2,7 +2,6 @@ import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
 import NavLink from "./NavLink"
-import { UserContext } from "../users/UserProvider"
 import { NotificationContext } from "../notifications/NotificationProvider"
 
 
@@ -10,7 +9,8 @@ import { NotificationContext } from "../notifications/NotificationProvider"
 export default (props) => {
 
 const {notifications}= useContext(NotificationContext)
-const usersNotifications = notifications.filter(not=> not.activeUserId === parseInt(localStorage.getItem("activeUser"),10))
+
+    const usersNotifications = notifications.filter(not=> not.activeUserId === parseInt(localStorage.getItem("activeUser"),10))||[]
 
 
     return (
@@ -50,5 +50,3 @@ const usersNotifications = notifications.filter(not=> not.activeUserId === parse
         </ul>
     )
 }
-
-{/* <Link className="navbar__link" to="/">Home</Link> */}
