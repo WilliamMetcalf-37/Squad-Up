@@ -13,7 +13,7 @@ export default ({ friend, history }) => {
 
     <>
       <div className="friendCard"  onClick={()=>{
-          history.push(`/messages/${friend.id}`)
+          history.push(`/messages/${friend.friendChatId}`)
         }}>
         <div className="friendName">{friend.user.username}
         <button >Remove Friend</button>

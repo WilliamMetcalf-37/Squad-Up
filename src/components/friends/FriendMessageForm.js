@@ -6,8 +6,8 @@ import { DirectMessageContext } from "./DirectMessageProvider"
 
 
 export default props => {
-  const { directMessages, addDirectMessages, updateDirectMessages } = useContext(DirectMessageContext)
-  const editMode = props.match.params.hasOwnProperty("friendChatId")
+  const { directMessages, addDirectMessage, updateDirectMessage } = useContext(DirectMessageContext)
+  const editMode = props.match.params.hasOwnProperty("directMessageId")
   const [message, setMessage] = useState({})
   const handleControlledInputChange = (event) => {
     /*
@@ -21,8 +21,8 @@ export default props => {
 
   const setDefaults = () => {
     if (editMode) {
-      const friendChatId = parseInt(props.match.params.friendChatId)
-      const selectedMessage = directMessages.find(m => m.id === friendChatId) || {}
+      const directMessageId = parseInt(props.match.params.directMessageId)
+      const selectedMessage = directMessages.find(m => m.id === directMessageId) || {}
       setMessage(selectedMessage)
     }
   }
@@ -33,7 +33,7 @@ export default props => {
   }, [directMessages])
   const constructNewMessage = () => {
     if (editMode) {
-      updateDirectMessages({
+      updateDirectMessage({
         id: message.id,
         message: message.message,
         friendChatId: message.friendChatId,
@@ -41,7 +41,7 @@ export default props => {
       }).then(() => props.history.push(`/messages/${message.friendChatId}`))
 
     } else {
-      addDirectMessages({
+      addDirectMessage({
         message: message.message,
         friendChatId: parseInt(props.match.params.friendChatId, 10),
         userId: parseInt(localStorage.getItem("activeUser"))

@@ -40,6 +40,16 @@ export const FriendChatProvider = (props) => {
         })
             .then(getFriendChats)
     }
+    const patchFriendChat = FriendChat => {
+        return fetch(`http://localhost:8088/friendChats/${FriendChat.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(FriendChat)
+        })
+            .then(getFriendChats)
+    }
 
     useEffect(() => {
         getFriendChats()
@@ -50,7 +60,7 @@ export const FriendChatProvider = (props) => {
 
     return (
         <FriendChatContext.Provider value={{
-            friendChats, addFriendChat, deleteFriendChat, updateFriendChat
+            friendChats, addFriendChat, deleteFriendChat, updateFriendChat, patchFriendChat
         }}>
             {props.children}
         </FriendChatContext.Provider>

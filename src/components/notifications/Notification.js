@@ -15,7 +15,7 @@ export default ({ notification, history }) => {
   const { userGroups, patchUserGroup, deleteUserGroup } = useContext(UserGroupContext)
   const { groups } = useContext(GroupContext)
   const { users } = useContext(UserContext)
-  const { addFriendChat } = useContext(FriendChatContext)
+  const { friendChats, patchFriendChat } = useContext(FriendChatContext)
   const activeUser = parseInt(localStorage.getItem("activeUser"), 10)
   let currentUser = {}
   let newFriend1 = {}
@@ -54,31 +54,36 @@ export default ({ notification, history }) => {
               }
             })
 
-
-
-            newFriend1 = {
-              id: friendOne.id,
-              confirmed: true
-            }
-            newFriend2 = {
-              id: friendTwo.id,
-              confirmed: true
-            }
-            patchFriend(newFriend1).then(() => {
-              patchFriend(newFriend2)
-            }).then(() => {
-              const newFriendChatOne = {
-                userId: friendOne.userId,
-                activeUserId: friendTwo.userId
+            const foundFriendChat = friendChats.find(fc => {
+              if (fc.userId === notification.activeUserId  && fc.activeUserId === notification.userId) {
+                return fc
               }
-              addFriendChat(newFriendChatOne)
-            }).then(() => {
-              const newFriendChatTwo = {
-                userId: friendTwo.userId,
-                activeUserId: friendOne.userId
-              }
-              addFriendChat(newFriendChatTwo)
             })
+
+            const updateFriendChat = {
+              id: foundFriendChat.id,
+              confirm: true
+            }
+
+            patchFriendChat(updateFriendChat).then(() => {
+
+
+              newFriend1 = {
+                id: friendOne.id,
+                friendChatId: foundFriendChat.id,
+                confirmed: true
+              }
+
+              patchFriend(newFriend1)
+            })
+              .then(() => {
+                newFriend2 = {
+                  id: friendTwo.id,
+                  friendChatId: foundFriendChat.id,
+                  confirmed: true
+                }
+                patchFriend(newFriend2)
+              })
               .then(() => {
                 deleteNotification(notification)
               })
