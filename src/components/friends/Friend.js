@@ -1,12 +1,19 @@
 import React, { useContext } from "react"
 
 import "./Friend.css"
+import { FriendContext } from "./FriendProvider"
 
 
 export default ({ friend, history }) => {
+const {deleteFriend, friends} = useContext(FriendContext)
 
+  const activeUserId = friend.activeUserId
 
-  const activeUser = parseInt(localStorage.getItem("activeUser"), 10)
+const otherFriendObject = friends.find(fri=> {
+  if(fri.userId === activeUserId && fri.activeUserId === friend.userId){
+    return fri
+  }
+})
 
 
   return (
@@ -16,7 +23,10 @@ export default ({ friend, history }) => {
           history.push(`/messages/${friend.friendChatId}`)
         }}>
         <div className="friendName">{friend.user.username}
-        <button >Remove Friend</button>
+        <button className="unfriend" onClick={()=>{
+          deleteFriend(friend).then(()=> deleteFriend(otherFriendObject)).then(()=>history.push("/friends"))
+
+        }}>Unfriend</button>
         </div>
       </div>
     </>

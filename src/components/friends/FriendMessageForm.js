@@ -1,12 +1,17 @@
 
 import React, { useContext, useState, useEffect } from "react"
 import { DirectMessageContext } from "./DirectMessageProvider"
+import { NotificationContext } from "../notifications/NotificationProvider"
+import { FriendChatContext } from "./FriendChatProvider"
+
 
 
 
 
 export default props => {
   const { directMessages, addDirectMessage, updateDirectMessage } = useContext(DirectMessageContext)
+  const {addNotification} = useContext(NotificationContext)
+  const {friendChats} = useContext(FriendChatContext)
   const editMode = props.match.params.hasOwnProperty("directMessageId")
   const [message, setMessage] = useState({})
   const handleControlledInputChange = (event) => {
@@ -45,7 +50,26 @@ export default props => {
         message: message.message,
         friendChatId: parseInt(props.match.params.friendChatId, 10),
         userId: parseInt(localStorage.getItem("activeUser"))
-      }).then(() => {
+      }).then(()=>{
+
+        const currentFriendChatId = parseInt(props.match.params.friendChatId,10)
+        const currentFriendChat = friendChats.find(fc=>fc.id === currentFriendChatId)||{}
+        let userMessageWasSentToId = null
+        if(currentFriendChat.userId===parseInt(localStorage.getItem("activeUser"),10)){
+          userMessageWasSentToId = currentFriendChat.activeUserId
+        } else {
+          userMessageWasSentToId = currentFriendChat.userId
+        }
+
+            const newNotification = {
+                    notificationTypeId: 1,
+                    userId: parseInt(localStorage.getItem("activeUser"),10),
+                     activeUserId: userMessageWasSentToId
+            }
+
+            addNotification(newNotification)
+      })
+      .then(() => {
         props.history.push(`/messages/${props.match.params.friendChatId}`)
     })
     }

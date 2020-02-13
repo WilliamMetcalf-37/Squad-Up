@@ -85,7 +85,7 @@ export default ({ group, history }) => {
                         })
                     
                   
-                }}>Remove From Squad
+                }}>Remove
               </button>
               <br></br>
               {currentUserGroup.status.status}
@@ -97,9 +97,9 @@ export default ({ group, history }) => {
     } else {
       return (
         <>
-          <h3>Group Leader</h3>
+          <h3>Squad Leader</h3>
           <div>{groupLeader.username}</div>
-          <h3>Group Members</h3>
+          <h3>Squad Members</h3>
           {groupMembers.map(user => {
             const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
 
@@ -136,11 +136,11 @@ export default ({ group, history }) => {
       statusId: 1
     }
     addUserGroup(newUserGroup).then(()=>{
-const foundUserGroup = userGroups.find(use => {
-  if(use.groupId === group.id && use.userId === parseInt(event.target.value)){
-return use
-  }
-}) || {}
+// const foundUserGroup = userGroups.find(use => {
+//   if(use.groupId === group.id && use.userId === userId){
+// return use
+//   }
+// }) || {}
 
 
       const newNotification = {

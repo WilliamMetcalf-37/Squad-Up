@@ -7,11 +7,12 @@ export default (props) => {
 
 let usersFriendsArray = []
 
-friends.filter(friend =>{
+friends.map(friend =>{
   if(friend.activeUserId === parseInt(localStorage.getItem("activeUser"),10) && friend.confirmed === true){
-    usersFriendsArray.push(friend)
+    return usersFriendsArray.push(friend)
   }
 })
+
 
     
 

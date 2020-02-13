@@ -1,4 +1,38 @@
+.friendCard:hover{
+  border: 1px solid black;
+  border-radius: 5px;
+  color: whitesmoke;
+  box-shadow:  3px 3px gray;
+  padding: 5px;
+  margin-bottom: 5px;
+ animation-name: rotate;
+ animation-duration: 2s;
+}
+
 .friendCard{
-  background-color: goldenrod;
-  border-radius: 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightskyblue;
+  box-shadow:  3px 3px gray;
+  padding: 2px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+@keyframes rotate{
+  0% {
+    transform: rotateZ(2deg);
+    border: 1px solid blue;
+    background-color: yellow;
+  }
+  25% {
+    transform: rotateZ(-2deg);
+    border: 1px solid green;
+    background-color: blue;
+  }
+  50% {transform: rotateZ(2deg);
+    border: 1px solid yellow;
+    background-color: red;}
+  100% {transform: rotateZ(-2deg);
+  }
 }

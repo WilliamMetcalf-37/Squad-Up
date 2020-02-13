@@ -15,13 +15,13 @@ export default (props) => {
 
 userGroups.filter(rel=>{
   if(rel.userId===currentUser){
-    myGroups.push(rel.group)
+    return myGroups.push(rel.group)
   }
 })
 
 groups.filter(gru => {
     if (currentUser === gru.groupLeaderId) {
-      groupsILead.push(gru)
+      return groupsILead.push(gru)
     }
   })
 
@@ -50,7 +50,7 @@ groups.filter(gru => {
           <h2>My Squads</h2>
           {
             myGroups.map(group => {
-              return <Group key={group.id} group={group} {...props} />
+              return <Group key={`${group.id} + ${group.name}`} group={group} {...props} />
             })
           }
         </div>

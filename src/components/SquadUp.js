@@ -4,8 +4,6 @@ import ApplicationViews from "./ApplicationViews"
 import NavBar from "./nav/NavBar"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
-
-import { NotificationProvider } from "./notifications/NotificationProvider"
 import ProviderProvider from "./ProviderProvider"
 
 export default () => (

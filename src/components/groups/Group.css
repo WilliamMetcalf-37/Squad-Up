@@ -1,5 +1,7 @@
 .mygroup{
-  border: 1px solid goldenrod;
+  border: 2px solid slategrey;
+  border-radius: 5px;
+  background-color: lightblue;
   padding: 2px;
   margin: 5px;
   max-width: 30%;
@@ -8,7 +10,8 @@
   color: blue
 }
 .individualUser{
-  border-top: 1px solid goldenrod
+  border-top: 1px solid black;
+
 }
 .groupsList{
   display: flex;
@@ -16,4 +19,8 @@
 }
 .groupsILead, .groupsImIn{
   display: flex;
+  border: 2px solid slategrey;
+  background-color: lightskyblue;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
 }

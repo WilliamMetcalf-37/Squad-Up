@@ -7,7 +7,6 @@ import GroupChatListSet from "./groupchat/GroupChatListSet";
 import ChatForm from "./groupchat/ChatForm";
 import FriendList from "./friends/FriendList";
 import NotificationList from "./notifications/NotificationList";
-import ProviderProvider from "./ProviderProvider";
 import UserList from "./users/UserList";
 import FriendMessageList from "./friends/FriendMessageList";
 import FriendMessageForm from "./friends/FriendMessageForm";
@@ -17,7 +16,7 @@ import "./ApplicationViews.css"
 export default (props) => {
   return (
     <>
-      <ProviderProvider>
+      
 
 
 
@@ -26,7 +25,7 @@ export default (props) => {
 
         <Route exact path="/messages/create/:friendChatId(\d+)"
           render={props => <FriendMessageForm {...props} />} />
-          
+
         <Route exact path="/messages/create/:friendChatId(\d+)/edit/:directMessageId(\d+)"
           render={props => <FriendMessageForm {...props} />} />
 
@@ -70,7 +69,7 @@ export default (props) => {
 
 
 
-      </ProviderProvider>
+      
     </>
   );
 }
