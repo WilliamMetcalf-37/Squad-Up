@@ -3,6 +3,7 @@ import "./Group.css"
 import { UserContext } from "../users/UserProvider"
 import { UserGroupContext } from "./UserGroupProvider"
 import { StatusContext } from "./StatusProvider"
+import { NotificationContext } from "../notifications/NotificationProvider"
 
 
 
@@ -10,7 +11,7 @@ export default ({ group, history }) => {
   const { users } = useContext(UserContext)
   const { status } = useContext(StatusContext)
   const { userGroups, addUserGroup, deleteUserGroup, patchUserGroup } = useContext(UserGroupContext)
-
+  const {addNotification} = useContext(NotificationContext)
 
 
   let groupMembers = []
@@ -42,6 +43,7 @@ export default ({ group, history }) => {
 
 
 
+
   const groupLeaderLoggedIn = () => {
     if (parseInt(localStorage.getItem("activeUser"), 10) === group.groupLeaderId) {
       return (
@@ -61,10 +63,29 @@ export default ({ group, history }) => {
               <div key={user.id} value={user.id} className="individualUser">{user.username}
                 <button onClick={props => {
                   const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
+                  const userId = currentUserGroup.userId
+                  const groupId = currentUserGroup.groupId
                   deleteUserGroup(currentUserGroup).then(() => {
-                    history.push("/")
-                  })
-                }}>Remove From Squad
+                    const foundUserGroup = userGroups.find(use => {
+                      if(use.groupId === group.id && use.userId === parseInt(currentUserGroup.userId)){
+                    return use
+                      }
+                    }) || {}
+                    
+                    
+                          const newNotification = {
+                            activeUserId:userId,
+                              userGroupId: foundUserGroup.id,
+                              notificationTypeId: 4,
+                              groupId: groupId
+                          }
+                          addNotification(newNotification)
+                        }).then(()=>{
+                          history.push("/")
+                        })
+                    
+                  
+                }}>Remove
               </button>
               <br></br>
               {currentUserGroup.status.status}
@@ -76,9 +97,9 @@ export default ({ group, history }) => {
     } else {
       return (
         <>
-          <h3>Group Leader</h3>
+          <h3>Squad Leader</h3>
           <div>{groupLeader.username}</div>
-          <h3>Group Members</h3>
+          <h3>Squad Members</h3>
           {groupMembers.map(user => {
             const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
 
@@ -88,7 +109,7 @@ export default ({ group, history }) => {
 
                 <select className="dropdown" id="statusDropdown" name="select"
                   onChange={patchUserGroupStatus}>
-                  <option value="0">Your Status</option>
+                  <option value="0">{currentUserGroup.status.status}</option>
                   {status.map(stat => <option key={stat.id} value={stat.id}>{stat.status}</option>)}
 
                 </select>
@@ -106,19 +127,29 @@ export default ({ group, history }) => {
 
 
   const addMemberToGroup = (event) => {
-    /*
-        When changing a state object or array, always create a new one
-        and change state instead of modifying current one
-    */
-    // const newUserGroup = Object.assign({}, userGroup)
-    // newUserGroup[event.target.select] = event.target.value
-    // setUserGroup(newUserGroup)
+    const userId = parseInt(event.target.value)
+    const groupId = group.id
+   
     const newUserGroup = {
       groupId: group.id,
-      userId: parseInt(event.target.value),
+      userId: userId,
       statusId: 1
     }
-    addUserGroup(newUserGroup).then(() => {
+    addUserGroup(newUserGroup).then(()=>{
+// const foundUserGroup = userGroups.find(use => {
+//   if(use.groupId === group.id && use.userId === userId){
+// return use
+//   }
+// }) || {}
+
+
+      const newNotification = {
+        activeUserId:userId,
+          notificationTypeId: 3,
+          groupId: groupId
+      }
+      addNotification(newNotification)
+    }).then(() => {
       history.push("/")
     })
   }
@@ -135,7 +166,7 @@ export default ({ group, history }) => {
     patchUserGroup(updateUserGroup)
   }
 
-  const groupLeader = users.find(user => group.groupLeaderId === user.id)
+  const groupLeader = users.find(user => group.groupLeaderId === user.id) ||{}
   return (
     <section className="mygroup">
 

@@ -6,14 +6,14 @@
 }
 
 .active {
-  background-color: darkgoldenrod;
+  background-color: #29487d;
 }
 
 
 .navbar__item {
   flex-basis: 20%;
   list-style-type: none;
-  background-color: goldenrod;
+  background-color: #4267b2;
   border-right: 1px solid whitesmoke;
   border-left: 1px solid whitesmoke;
   text-align: center;

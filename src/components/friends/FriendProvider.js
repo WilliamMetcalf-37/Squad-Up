@@ -30,9 +30,9 @@ export const FriendProvider = (props) => {
     }
 
 
-    const updateFriend = Friend => {
+    const patchFriend = Friend => {
         return fetch(`http://localhost:8088/friends/${Friend.id}`, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -50,7 +50,7 @@ export const FriendProvider = (props) => {
 
     return (
         <FriendContext.Provider value={{
-            friends, addFriend, deleteFriend, updateFriend
+            friends, addFriend, deleteFriend, patchFriend
         }}>
             {props.children}
         </FriendContext.Provider>

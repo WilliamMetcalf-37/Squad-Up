@@ -23,7 +23,6 @@ export const EventProvider = (props) => {
   }, [])
 
   useEffect(() => {
-    console.log(events)
 }, [events])
     return (
         <EventContext.Provider value={{

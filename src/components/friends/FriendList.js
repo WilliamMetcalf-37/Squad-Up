@@ -7,12 +7,12 @@ export default (props) => {
 
 let usersFriendsArray = []
 
-friends.filter(friend =>{
+friends.map(friend =>{
   if(friend.activeUserId === parseInt(localStorage.getItem("activeUser"),10) && friend.confirmed === true){
-    usersFriendsArray.push(friend)
+    return usersFriendsArray.push(friend)
   }
 })
-console.log("friendArray", usersFriendsArray)
+
 
     
 
@@ -20,7 +20,7 @@ console.log("friendArray", usersFriendsArray)
       <>
       <div className="FriendsList">
           <div>
-              <h1>Friends</h1>
+              <h2>Friends</h2>
           </div>    
         
           <div className="Friends">

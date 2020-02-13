@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import "./Event.css"
 import { EventContext } from "./EventProvider"
 import Event from "./Event"
@@ -7,7 +7,9 @@ export default (props) => {
     const { events } = useContext(EventContext)
 
 
-    
+    // useEffect(() => {
+    //     console.log("**** Effect hook for events", events)
+    // })
 
     return (
       <>

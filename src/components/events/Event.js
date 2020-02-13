@@ -61,7 +61,7 @@ const foundUser = users.find(user => user.id === parseInt(localStorage.getItem("
   patchUser(patchTheUser)
 addGroupChat(firstChat)
 }).then(()=>{
-  window.alert(`You have create a new group for ${event.name}`)
+  window.alert(`You have create a new group at ${event.venue.name} for ${event.artistList[0].name} on ${event.date}`)
 })
             
 

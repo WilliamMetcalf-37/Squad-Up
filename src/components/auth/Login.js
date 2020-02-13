@@ -8,9 +8,7 @@ import { UserContext } from "../users/UserProvider";
 
 
 const Login = props => {
-    const {userGroups} = useContext(UserGroupContext)
-    const {groups} = useContext(GroupContext)
-    const {users}  = useContext(UserContext)
+ 
 
 
 
@@ -52,8 +50,7 @@ const Login = props => {
                             username: username.current.value,
                             password: password.current.value,
                             firstName: firstName.current.value,
-                            lastName: lastName.current.value,
-                            groupLength:0
+                            lastName: lastName.current.value
                         })
                     })
                         .then(_ => _.json())
@@ -61,21 +58,7 @@ const Login = props => {
                             localStorage.setItem("activeUser", response.id)
                             props.history.push("/")
 
-                            const currentUser = parseInt(localStorage.getItem("activeUser"),10)
-                            let myGroups=[]
-                            userGroups.filter(rel=>{
-                                if(rel.userId===currentUser){
-                                  myGroups.push(rel.group)
-                                }
-                              })
-
-                                groups.filter(gru => {
-                                  if (currentUser === gru.groupLeaderId) {
-                                    myGroups.push(gru)
-                                  }
-                                })
-
-
+                       
 
 
                         })

@@ -35,8 +35,7 @@ const Register = props => {
                             username: username.current.value,
                             password: password.current.value,
                             firstName: firstName.current.value,
-                            lastName: lastName.current.value,
-                            groupLength: 0
+                            lastName: lastName.current.value
                         })
                     })
                         .then(_ => _.json())
