@@ -29,7 +29,7 @@ export default ({ event, history }) => {
   return (
     <section className="myEvent">
       <h3 className="event__name">Venue: {event.venue.name}</h3>
-      <div>{event.name}</div>
+      <a href={event.link}>Tickets</a> <br></br><br></br>
       <div>Artists</div>
       <ul>
         {artistFunction()}
