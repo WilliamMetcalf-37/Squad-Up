@@ -32,6 +32,8 @@ const activeUser = parseInt(localStorage.getItem("activeUser"))
         </div>
         <div className="messageMessage">
           {message.message}
+        </div>
+        <div>
           {currentUserFunction()}
         </div>
       </div>

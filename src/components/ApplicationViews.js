@@ -12,6 +12,7 @@ import FriendMessageList from "./friends/FriendMessageList";
 import FriendMessageForm from "./friends/FriendMessageForm";
 import UserListPending from "./users/UserListPending";
 import "./ApplicationViews.css"
+import FriendChatList from "./friends/FriendChatList";
 
 export default (props) => {
   return (
@@ -59,6 +60,8 @@ export default (props) => {
 
         <Route exact path="/chat"
           render={props => <GroupChatListSet {...props} />} />
+        <Route exact path="/chat"
+          render={props => <FriendChatList {...props} />} />
 
         <Route exact path="/chat/create/:groupId(\d+)"
           render={props => <ChatForm {...props} />} />

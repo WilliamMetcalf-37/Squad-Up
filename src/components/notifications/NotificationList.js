@@ -5,18 +5,26 @@ import Notification from "./Notification"
 
 export default (props) => {
 
-const {notifications} = useContext(NotificationContext)
+  const { notifications } = useContext(NotificationContext)
 
-const usersNotifications = notifications.filter(not=> not.activeUserId === parseInt(localStorage.getItem("activeUser"),10))
+  const usersNotifications = notifications.filter(not => not.activeUserId === parseInt(localStorage.getItem("activeUser"), 10))
 
-return (
-  <>
-  <h1>Notifications</h1>
-  {
-    usersNotifications.map(not => <Notification key={not.id} notification={not}    {...props}/>)
-  }
-  </>
-)
+  return (
+    <>
+      <div className="allTheNotifications">
+        <div className="notificationTitle">
+
+          <h1>Notifications</h1>
+        </div>
+        <div className="notifications">
+
+          {
+            usersNotifications.map(not => <Notification key={not.id} notification={not}    {...props} />)
+          }
+        </div>
+      </div>
+    </>
+  )
 
 
 }

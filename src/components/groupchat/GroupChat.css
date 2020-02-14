@@ -1,37 +1,64 @@
 .groupchatcard{
-  border: 1px solid black;
   border-radius: 5px;
-  background-color: lightskyblue;
-  box-shadow:  5px 5px gray;
+  background-color: white;
+  box-shadow:  3px 3px gray;
   padding: 2px;
   margin-bottom: 5px;
   width: 30%;
   text-align: center;
 }
 
-
+.groupChatCardList{
+  border-radius: 5px;
+  background-color: lightskyblue;
+  box-shadow:  5px 5px gray;
+  padding: 2px;
+  margin-bottom: 5px;
+  text-align: center;
+}
 
 .groupchatcard:hover{
   border: 1px solid black;
   border-radius: 5px;
-  color: whitesmoke;
   box-shadow:  5px 5px gray;
   padding: 2px;
   margin-bottom: 5px;
   max-width: 30%;
- animation-name: rotate;
- animation-duration: 2s;
+  animation-name: rotate;
+  animation-duration: 2s;
 }
 .messageCard{
-  border: 1px solid black;
-  padding: 2px;
-  max-width: 30%;
+  text-align: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: .5rem;
+  
 }
 .currentGroup{
+  margin-top: 1rem;
   font-size: 24px;
   font-weight: bold;
 }
 .groupChatButtonCards{
   display: flex;
   justify-content: space-evenly;
+}
+.GroupChat{
+  background-color: lightskyblue;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.individualGroupChat{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
 }
