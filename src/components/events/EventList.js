@@ -14,7 +14,7 @@ export default (props) => {
     return (
       <>
       <div className="eventsList">
-          <div>
+          <div className="eventTitle">
               <h1>Events</h1>
           </div>    
         

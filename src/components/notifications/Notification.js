@@ -30,7 +30,7 @@ export default ({ notification, history }) => {
           You have a message from {currentUser.username}
           <button className="clearNote" onClick={() => {
             deleteNotification(notification)
-          }}>Clear Notification</button>
+          }}>X</button>
         </div>
       </>)
     } else if (notification.notificationTypeId === 2) {
@@ -55,7 +55,7 @@ export default ({ notification, history }) => {
             })
 
             const foundFriendChat = friendChats.find(fc => {
-              if (fc.userId === notification.activeUserId  && fc.activeUserId === notification.userId) {
+              if (fc.userId === notification.activeUserId && fc.activeUserId === notification.userId) {
                 return fc
               }
             })
@@ -87,7 +87,7 @@ export default ({ notification, history }) => {
               .then(() => {
                 deleteNotification(notification)
               })
-          }}>Add Friend</button>
+          }}>Accept</button>
           <button className="rejectRequest" onClick={() => {
             newFriend1 = {
               id: notification.friendId1
@@ -102,7 +102,7 @@ export default ({ notification, history }) => {
             }).then(() => {
               history.push("/notifications")
             })
-          }}>Deny Request</button>
+          }}>Deny</button>
         </div>
       </>)
 
@@ -155,11 +155,15 @@ export default ({ notification, history }) => {
     } else if (notification.notificationTypeId === 5) {
       const user = users.find(use => use.id === notification.userId)
       return (<>
-        <div>{user.username} has removed you as a friend
-<button className="clearNote" onClick={() => {
-            deleteNotification(notification)
-          }}>Clear Notification</button>
+        <div className="unfriended">
+          <div>{user.username} has removed you as a friend
+            <button className="clearNote" onClick={() => {
+              deleteNotification(notification)
+            }}>X</button>
+          </div>
         </div>
+
+
       </>)
 
 

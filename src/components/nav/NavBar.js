@@ -16,7 +16,7 @@ const {notifications}= useContext(NotificationContext)
     return (
         <ul className="navbar">
             <li className="navbar__item">
-                <NavLink to="/" {...props}>Home</NavLink>    
+                <NavLink to="/" {...props}>Squads</NavLink>    
             </li>
             <li className="navbar__item">
                 <NavLink to="/friends" {...props}>Friends</NavLink>

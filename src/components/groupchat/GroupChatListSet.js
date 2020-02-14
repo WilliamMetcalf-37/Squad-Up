@@ -41,8 +41,12 @@ allTheGroups = myGroups.concat(groupsILead)
 return (
 
  <>
+ <div className="groupChatCardList">
+   <h2>Group Chats</h2>
+ 
  <div className="groupChatButtonCards">
  {allTheGroups.map(gru => <GroupChatCard key={groups.id} group={gru} {...props} />)}
+ </div>
  </div>
  </>
 )

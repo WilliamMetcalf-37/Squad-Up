@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Expanded&display=swap');
+
+
+body,button,input,select{
+  font-family: "Encode",Arial,sans-serif;
+}
+
+h1,h2,h3,h4{
+  font-family: "Encode",Arial,sans-serif;
+
+}

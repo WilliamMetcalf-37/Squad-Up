@@ -5,7 +5,7 @@ import { FriendContext } from "./FriendProvider"
 
 
 export default ({ friend, history }) => {
-const {deleteFriend, friends} = useContext(FriendContext)
+const { friends} = useContext(FriendContext)
 
   const activeUserId = friend.activeUserId
 
@@ -19,12 +19,11 @@ const otherFriendObject = friends.find(fri=> {
   return (
 
     <>
-      <div className="friendCard">
+      <div className="friendChatCard"  onClick={()=>{
+          history.push(`/messages/${friend.friendChatId}`)
+        }}>
         <div className="friendName">{friend.user.username}
-        <button className="unfriend" onClick={()=>{
-          deleteFriend(friend).then(()=> deleteFriend(otherFriendObject)).then(()=>history.push("/friends"))
-
-        }}>Unfriend</button>
+       
         </div>
       </div>
     </>

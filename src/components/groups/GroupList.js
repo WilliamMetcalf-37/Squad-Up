@@ -13,13 +13,13 @@ export default (props) => {
   const groupsILead = []
   const myGroups = []
 
-userGroups.filter(rel=>{
-  if(rel.userId===currentUser){
-    return myGroups.push(rel.group)
-  }
-})
+  userGroups.filter(rel => {
+    if (rel.userId === currentUser) {
+      return myGroups.push(rel.group)
+    }
+  })
 
-groups.filter(gru => {
+  groups.filter(gru => {
     if (currentUser === gru.groupLeaderId) {
       return groupsILead.push(gru)
     }
@@ -31,30 +31,36 @@ groups.filter(gru => {
 
 
 
-  
+
 
 
 
   return (
     <>
       <div className="groupsList">
-
         <div className="groupsILead">
-          <h2>Squads I Put Together</h2>
+          <div>
+            <h2>Squads I Put Together</h2>
+          </div>
+          <div className="myGroupList">
           {groupsILead.map(group => {
-                return <Group key={group.id} group={group} {...props} />
-              })
-            }
+            return <Group key={group.id} group={group} {...props} />
+          })
+          } 
+          </div>
         </div>
         <div className="groupsImIn">
-          <h2>My Squads</h2>
-          {
+          <div>
+        <h2>My Squads</h2>
+          </div>
+          <div className="myGroupList">
+             {
             myGroups.map(group => {
               return <Group key={`${group.id} + ${group.name}`} group={group} {...props} />
             })
           }
+          </div>       
         </div>
-
       </div>
     </>
   )

@@ -5,6 +5,7 @@ import NavBar from "./nav/NavBar"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import ProviderProvider from "./ProviderProvider"
+import './SquadUp.css'
 
 export default () => (
     <>

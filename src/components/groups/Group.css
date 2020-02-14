@@ -1,10 +1,11 @@
 .mygroup{
-  border: 2px solid slategrey;
+  
   border-radius: 5px;
-  background-color: lightblue;
-  padding: 2px;
+  background-color: white;
+  padding: 1rem;
   margin: 5px;
-  max-width: 30%;
+
+  
 }
 .currentUser{
   color: blue
@@ -19,8 +20,16 @@
 }
 .groupsILead, .groupsImIn{
   display: flex;
-  border: 2px solid slategrey;
+  flex-direction: column;
+  justify-content: start;
   background-color: lightskyblue;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
+  padding: 1rem
+}
+.myGroupList{
+ display: flex;
+ flex-basis: 22%;
+ justify-content: start;
+
 }

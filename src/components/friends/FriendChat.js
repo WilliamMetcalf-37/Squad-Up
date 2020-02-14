@@ -33,8 +33,11 @@ export default ({ message, history }) => {
         </div>
         <div className="messageMessage">
           {message.message}
+        </div>
+        <div>
           {currentUserFunction()}
         </div>
+          
       </div>
     </>
   )
