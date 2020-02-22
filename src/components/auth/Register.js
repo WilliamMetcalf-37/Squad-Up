@@ -76,7 +76,7 @@ const Register = props => {
                     <input ref={username} type="text"
                         name="username"
                         className="form-control"
-                        placeholder="Email address"
+                        placeholder="Username"
                         required />
                 </fieldset>
                 <fieldset>

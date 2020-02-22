@@ -97,3 +97,17 @@
   justify-content: center;
 }
 
+
+.messageForm{
+  border-radius: 5px;
+  background-color: lightskyblue;
+  box-shadow:  3px 3px gray;
+  padding: .5rem;
+  margin-bottom: 5px;
+  margin-right: 1rem;
+  text-align: center;
+}
+.form-control{
+  margin: auto;
+  max-width: 80%;
+}

@@ -4,6 +4,8 @@ import { UserContext } from "../users/UserProvider"
 import { UserGroupContext } from "./UserGroupProvider"
 import { StatusContext } from "./StatusProvider"
 import { NotificationContext } from "../notifications/NotificationProvider"
+import { GroupContext } from "./GroupProvider"
+import { FriendContext } from "../friends/FriendProvider"
 
 
 
@@ -11,34 +13,46 @@ export default ({ group, history }) => {
   const { users } = useContext(UserContext)
   const { status } = useContext(StatusContext)
   const { userGroups, addUserGroup, deleteUserGroup, patchUserGroup } = useContext(UserGroupContext)
-  const {addNotification} = useContext(NotificationContext)
+  const { addNotification } = useContext(NotificationContext)
+  const { friends } = useContext(FriendContext)
 
+  let usersFriendsArray = []
+  
+  friends.map(friend =>{
+    if(friend.activeUserId === parseInt(localStorage.getItem("activeUser"),10) && friend.confirmed === true){
+      return usersFriendsArray.push(friend)
+    }
+  })
 
   let groupMembers = []
 
-//filter to grab members of the specific group
- userGroups.filter(usg => {
+  //filter to grab members of the specific group
+  userGroups.filter(usg => {
     if (group.id === usg.groupId) {
       groupMembers.push(usg.user)
     }
   })
 
 
+
+
+
+
   let nonMembersArray = []
-  users.filter(user => {
-    if (user.id !== parseInt(localStorage.getItem("activeUser"), 10)) {
-      if(user.id !== 1){
+  usersFriendsArray.filter(user => {
+    if (user.user.id !== parseInt(localStorage.getItem("activeUser"), 10)) {
+      if (user.user.id !== 1) {
 
-      
-      const userInGroup = groupMembers.find(friend => friend.id === user.id) || null
-      if (userInGroup === null) {
-        nonMembersArray.push(user)
 
+        const userInGroup = groupMembers.find(friend => friend.id === user.user.id) || null
+        if (userInGroup === null) {
+          nonMembersArray.push(user)
+
+        }
       }
     }
-  }
   })
-
+console.log("groupmembers", groupMembers)
 
 
 
@@ -48,18 +62,17 @@ export default ({ group, history }) => {
     if (parseInt(localStorage.getItem("activeUser"), 10) === group.groupLeaderId) {
       return (
         <>
+      
           <select className="dropdown" id="userDropdown" name="select"
             onChange={addMemberToGroup}>
-            <option value="0">Add Friends to Squad</option>
-            {nonMembersArray.map(user => <option key={user.id} value={user.id}>{user.username}</option>)}
+            <option value="0" selected disabled>Add Friends to Squad</option>
+            {nonMembersArray.map(user => <option key={user.user.id} value={user.user.id}>{user.user.username}</option>)}
 
           </select>
-          <h3>Squad Leader</h3>
-          <div>{groupLeader.username}</div>
           <h3>Squad Members</h3>
           {groupMembers.map(user => {
-          const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
-            return <>
+            const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
+            return (<>
               <div key={user.id} value={user.id} className="individualUser">{user.username}
                 <button onClick={props => {
                   const currentUserGroup = userGroups.find(use => user.id === use.userId && group.id === use.groupId)
@@ -67,30 +80,32 @@ export default ({ group, history }) => {
                   const groupId = currentUserGroup.groupId
                   deleteUserGroup(currentUserGroup).then(() => {
                     const foundUserGroup = userGroups.find(use => {
-                      if(use.groupId === group.id && use.userId === parseInt(currentUserGroup.userId)){
-                    return use
+                      if (use.groupId === group.id && use.userId === parseInt(currentUserGroup.userId)) {
+                        return use
                       }
                     }) || {}
-                    
-                    
-                          const newNotification = {
-                            activeUserId:userId,
-                              userGroupId: foundUserGroup.id,
-                              notificationTypeId: 4,
-                              groupId: groupId
-                          }
-                          addNotification(newNotification)
-                        }).then(()=>{
-                          history.push("/")
-                        })
-                    
-                  
+
+
+                    const newNotification = {
+                      activeUserId: userId,
+                      userGroupId: foundUserGroup.id,
+                      notificationTypeId: 4,
+                      groupId: groupId
+                    }
+                    addNotification(newNotification)
+                  }).then(() => {
+                    history.push("/")
+                  })
+
+
                 }}>Remove
               </button>
-              <br></br>
-              {currentUserGroup.status.status}
+                <br></br>
+                {currentUserGroup.status.status}
               </div>
+              
             </>
+            )
           })}
         </>
       )
@@ -129,24 +144,24 @@ export default ({ group, history }) => {
   const addMemberToGroup = (event) => {
     const userId = parseInt(event.target.value)
     const groupId = group.id
-   
+
     const newUserGroup = {
-      groupId: group.id,
+      groupId: groupId,
       userId: userId,
       statusId: 1
     }
-    addUserGroup(newUserGroup).then(()=>{
-// const foundUserGroup = userGroups.find(use => {
-//   if(use.groupId === group.id && use.userId === userId){
-// return use
-//   }
-// }) || {}
+    addUserGroup(newUserGroup).then(() => {
+      // const foundUserGroup = userGroups.find(use => {
+      //   if(use.groupId === group.id && use.userId === userId){
+      // return use
+      //   }
+      // }) || {}
 
 
       const newNotification = {
-        activeUserId:userId,
-          notificationTypeId: 3,
-          groupId: groupId
+        activeUserId: userId,
+        notificationTypeId: 3,
+        groupId: groupId
       }
       addNotification(newNotification)
     }).then(() => {
@@ -166,11 +181,14 @@ export default ({ group, history }) => {
     patchUserGroup(updateUserGroup)
   }
 
-  const groupLeader = users.find(user => group.groupLeaderId === user.id) ||{}
+  const groupLeader = users.find(user => group.groupLeaderId === user.id) || {}
   return (
     <section className="mygroup">
-
-      <h3 className="group__name">{group.name}</h3>
+      
+        
+        <h3 className="group__name">{group.name}</h3>
+      
+      <a href={group.tickets}>Tickets</a>
       <div className="group__artist">{group.artist}</div>
       <div className="group__time">{group.date}</div>
 

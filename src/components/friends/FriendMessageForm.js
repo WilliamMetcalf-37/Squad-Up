@@ -81,7 +81,7 @@ export default props => {
       <h2 className="messageForm__title">{editMode ? "Update Message" : "Write Message"}</h2>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="name">message name: </label>
+          <label htmlFor="name">Message: </label>
           <input type="text" name="message" required autoFocus className="form-control"
             proptype="varchar"
             placeholder="Write your message Here!"

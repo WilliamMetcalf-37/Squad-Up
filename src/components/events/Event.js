@@ -29,7 +29,6 @@ export default ({ event, history }) => {
   return (
     <section className="myEvent">
       <h3 className="event__name">Venue: {event.venue.name}</h3>
-      <a href={event.link}>Tickets</a> <br></br><br></br>
       <div>Artists</div>
       <ul>
         {artistFunction()}
@@ -41,6 +40,7 @@ export default ({ event, history }) => {
           date: event.date,
           name: event.venue.name,
           artist: event.artistList[0].name,
+          tickets: event.link,
           groupLeaderId: parseInt(localStorage.getItem("activeUser"), 10)
         }
 

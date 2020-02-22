@@ -23,7 +23,7 @@ export const GroupProvider = (props) => {
     }
 
     const deleteGroup = group => {
-        return fetch(`http://localhost:8088/Groups/${group.id}`, {
+        return fetch(`http://localhost:8088/groups/${group.id}`, {
             method: "DELETE"
         })
             .then(getGroups)
@@ -31,7 +31,7 @@ export const GroupProvider = (props) => {
 
 
     const updateGroup = group => {
-        return fetch(`http://localhost:8088/Groups/${group.id}`, {
+        return fetch(`http://localhost:8088/groups/${group.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

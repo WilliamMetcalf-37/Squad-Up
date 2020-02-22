@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import { FriendContext } from "./FriendProvider"
-import Friend from "./Friend"
 import FriendChatCard from "./FriendChatCard"
 
 export default (props) => {

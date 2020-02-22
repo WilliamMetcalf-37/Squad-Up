@@ -3,15 +3,18 @@ import { Link } from "react-router-dom"
 import "./NavBar.css"
 import NavLink from "./NavLink"
 import { NotificationContext } from "../notifications/NotificationProvider"
+import { UserContext } from "../users/UserProvider"
 
 
 
 export default (props) => {
 
 const {notifications}= useContext(NotificationContext)
+const {users}= useContext(UserContext)
 
     const usersNotifications = notifications.filter(not=> not.activeUserId === parseInt(localStorage.getItem("activeUser"),10))||[]
-
+const currentUser = users.find(user => user.id === parseInt(localStorage.getItem("activeUser"),10)) ||{}
+const activeUserName = currentUser.username
 
     return (
         <ul className="navbar">
@@ -43,7 +46,7 @@ const {notifications}= useContext(NotificationContext)
                                 localStorage.removeItem("activeUser")
                                 props.history.push("/")
                             }}
-                        >Logout</Link>
+                        >{activeUserName}! Logout</Link>
                     </li>
                     : ""
             }
