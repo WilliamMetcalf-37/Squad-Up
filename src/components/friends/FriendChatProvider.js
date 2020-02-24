@@ -6,13 +6,13 @@ export const FriendChatProvider = (props) => {
     const [friendChats, setFriendChats] = useState([])
 
     const getFriendChats = () => {
-        return fetch("http://localhost:8088/friendChats")
+        return fetch("http://localhost:8088/friendsChats")
             .then(res => res.json())
             .then(setFriendChats)
     }
 
     const addFriendChat = FriendChat => {
-        return fetch("http://localhost:8088/friendChats", {
+        return fetch("http://localhost:8088/friendsChats", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -23,7 +23,7 @@ export const FriendChatProvider = (props) => {
     }
 
     const deleteFriendChat = FriendChat => {
-        return fetch(`http://localhost:8088/friendChats/${FriendChat.id}`, {
+        return fetch(`http://localhost:8088/friendsChats/${FriendChat.id}`, {
             method: "DELETE"
         })
             .then(getFriendChats)
@@ -31,7 +31,7 @@ export const FriendChatProvider = (props) => {
 
 
     const updateFriendChat = FriendChat => {
-        return fetch(`http://localhost:8088/friendChats/${FriendChat.id}`, {
+        return fetch(`http://localhost:8088/friendsChats/${FriendChat.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -41,7 +41,7 @@ export const FriendChatProvider = (props) => {
             .then(getFriendChats)
     }
     const patchFriendChat = FriendChat => {
-        return fetch(`http://localhost:8088/friendChats/${FriendChat.id}`, {
+        return fetch(`http://localhost:8088/friendsChats/${FriendChat.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

@@ -42,7 +42,7 @@ return (
 
  <>
  <div className="groupChatCardList">
-   <h2>Group Chats</h2>
+   <h2>Group Chat</h2>
  
  <div className="groupChatButtonCards">
  {allTheGroups.map(gru => <GroupChatCard key={groups.id} group={gru} {...props} />)}

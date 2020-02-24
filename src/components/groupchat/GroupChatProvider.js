@@ -23,7 +23,7 @@ export const GroupChatProvider = (props) => {
     }
 
     const deleteGroupChat = groupChat => {
-        return fetch(`http://localhost:8088/GroupChats/${groupChat.id}`, {
+        return fetch(`http://localhost:8088/groupChats/${groupChat.id}`, {
             method: "DELETE"
         })
             .then(getGroupChats)
@@ -31,7 +31,7 @@ export const GroupChatProvider = (props) => {
 
 
     const updateGroupChat = groupChat => {
-        return fetch(`http://localhost:8088/GroupChats/${groupChat.id}`, {
+        return fetch(`http://localhost:8088/groupChats/${groupChat.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

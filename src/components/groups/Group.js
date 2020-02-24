@@ -52,7 +52,7 @@ export default ({ group, history }) => {
       }
     }
   })
-console.log("groupmembers", groupMembers)
+
 
 
 

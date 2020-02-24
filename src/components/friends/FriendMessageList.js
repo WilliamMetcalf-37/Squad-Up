@@ -37,7 +37,7 @@ export default (props) => {
 
 
   const filteredDirectMessages = directMessages.filter(message => message.friendChatId === parseInt(currentFriendChatId), 10) || []
-  console.log(filteredDirectMessages)
+  
   return (<>
 
     <div className="allDirectChat">

@@ -20,7 +20,7 @@
   margin-right: auto;
 }
 
-.rejectRequest, .addFriend, .clearNote{
+.addFriend, .rejectRequest, .clearNote{
 margin-right: .5rem;
 margin-left: .5rem;
 float: right;

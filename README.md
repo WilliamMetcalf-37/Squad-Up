@@ -1,68 +1,104 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Squad Up!
 
-## Available Scripts
+Squad Up! is a social media-like application
+## Installation
 
-In the project directory, you can run:
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Squad Up!
 
-### `npm start`
+```bash
+npm i --save react-router-dom
+npm start from the root directory to run application
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Database sample
+Create a json file, database.json,  using the provided data, and run the server on port 8088
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+```bash
+json-server -w database.json -p 8088
+```
+```
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "GroupChatRobot",
+      "password": "1",
+      "firstName": "robot",
+      "lastName": "robot"
+    },
+  
+  ],
+  "userGroups": [
+ 
+  ],
+  "groups": [
+   
+  ],
+  "groupChats": [
+    
+  ],
+  "friends": [
+    
+  ],
+  "friendsChats": [
+  
+  ],
+  "directMessages": [
+    
+  ],
+  "notifications": [
+   
+  ],
+  "notificationType": [
+    {
+      "id": 1,
+      "type": "Message"
+    },
+    {
+      "id": 2,
+      "type": "Friend"
+    },
+    {
+      "id": 3,
+      "type": "Squad"
+    },
+    {
+      "id": 4,
+      "type": "Squad Removed"
+    },
+    {
+      "id": 5,
+      "type": "Unfriended"
+    }
+  ],
+  "statuses": [
+    {
+      "id": 1,
+      "status": "Pending"
+    },
+    {
+      "id": 2,
+      "status": "Joined Squad"
+    },
+    {
+      "id": 4,
+      "status": "Purchased a Ticket"
+    },
+    {
+      "id": 5,
+      "status": "Need $ Assistance"
+    }
+  ]
+}
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Usage
+1. Register as a new user/ login with existing username and password.
+2. Navigate to friends tab and click 'add friend' button on friend you want to add
+3. Navigate to Events by EDM Train tab
+4. Click 'Create Squad' button on Event you would like to make a squad for.
+5. Navigate to Squads tab to view your squads
+6. Use dropdown to add your friends to your squad.
+7. Navigate to Chat tab to view all available chats.
+8. Click on desired chat to view chat history and write new messages

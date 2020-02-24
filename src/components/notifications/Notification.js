@@ -41,6 +41,21 @@ export default ({ notification, history }) => {
         <div className="friendRequest">
           {/* user who sent the requsts username */}
           You have a Friend Request From {currentUser.username}
+          <button className="rejectRequest" onClick={() => {
+            newFriend1 = {
+              id: notification.friendId1
+            }
+            newFriend2 = {
+              id: notification.friendId2
+            }
+            deleteFriend(newFriend1).then(() => {
+              deleteFriend(newFriend2)
+            }).then(() => {
+              deleteNotification(notification)
+            }).then(() => {
+              history.push("/notifications")
+            })
+          }}>Deny</button>
           <button className="addFriend" onClick={() => {
 
             const friendOne = friends.find(friend => {
@@ -88,21 +103,7 @@ export default ({ notification, history }) => {
                 deleteNotification(notification)
               })
           }}>Accept</button>
-          <button className="rejectRequest" onClick={() => {
-            newFriend1 = {
-              id: notification.friendId1
-            }
-            newFriend2 = {
-              id: notification.friendId2
-            }
-            deleteFriend(newFriend1).then(() => {
-              deleteFriend(newFriend2)
-            }).then(() => {
-              deleteNotification(notification)
-            }).then(() => {
-              history.push("/notifications")
-            })
-          }}>Deny</button>
+          
         </div>
       </>)
 
