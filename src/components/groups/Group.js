@@ -6,6 +6,7 @@ import { StatusContext } from "./StatusProvider"
 import { NotificationContext } from "../notifications/NotificationProvider"
 import { GroupContext } from "./GroupProvider"
 import { FriendContext } from "../friends/FriendProvider"
+import { GroupChatContext } from "../groupchat/GroupChatProvider"
 
 
 
@@ -15,11 +16,13 @@ export default ({ group, history }) => {
   const { userGroups, addUserGroup, deleteUserGroup, patchUserGroup } = useContext(UserGroupContext)
   const { addNotification } = useContext(NotificationContext)
   const { friends } = useContext(FriendContext)
+  const { deleteGroup } = useContext(GroupContext)
+  const { groupChats, deleteGroupChat } = useContext(GroupChatContext)
 
   let usersFriendsArray = []
-  
-  friends.map(friend =>{
-    if(friend.activeUserId === parseInt(localStorage.getItem("activeUser"),10) && friend.confirmed === true){
+
+  friends.map(friend => {
+    if (friend.activeUserId === parseInt(localStorage.getItem("activeUser"), 10) && friend.confirmed === true) {
       return usersFriendsArray.push(friend)
     }
   })
@@ -62,7 +65,33 @@ export default ({ group, history }) => {
     if (parseInt(localStorage.getItem("activeUser"), 10) === group.groupLeaderId) {
       return (
         <>
-      
+          <button className="deleteSquad" onClick={() => {
+
+            deleteGroup(group)
+
+            // groupChats.map(chat => {
+            //   if (chat.groupId === group.id) {
+            //     deleteGroupChat(chat).then(() => {
+            //       userGroups.map(userGroup => {
+
+            //         if (userGroup.groupId === group.id) {
+
+            //           deleteUserGroup(userGroup).then(() => {
+
+            //           })
+            //         }
+            //       })
+            //     })
+            //   }
+            // })
+
+
+          }}>X</button>
+          <h3 className="group__name">{group.name}</h3>
+
+          <a href={group.tickets}>Tickets</a>
+          <div className="group__artist">{group.artist}</div>
+          <div className="group__time">{group.date}</div>
           <select className="dropdown" id="userDropdown" name="select"
             onChange={addMemberToGroup}>
             <option value="0" selected disabled>Add Friends to Squad</option>
@@ -103,7 +132,7 @@ export default ({ group, history }) => {
                 <br></br>
                 {currentUserGroup.status.status}
               </div>
-              
+
             </>
             )
           })}
@@ -112,6 +141,11 @@ export default ({ group, history }) => {
     } else {
       return (
         <>
+          <h3 className="group__name">{group.name}</h3>
+
+          <a href={group.tickets}>Tickets</a>
+          <div className="group__artist">{group.artist}</div>
+          <div className="group__time">{group.date}</div>
           <h3>Squad Leader</h3>
           <div>{groupLeader.username}</div>
           <h3>Squad Members</h3>
@@ -184,13 +218,9 @@ export default ({ group, history }) => {
   const groupLeader = users.find(user => group.groupLeaderId === user.id) || {}
   return (
     <section className="mygroup">
-      
-        
-        <h3 className="group__name">{group.name}</h3>
-      
-      <a href={group.tickets}>Tickets</a>
-      <div className="group__artist">{group.artist}</div>
-      <div className="group__time">{group.date}</div>
+
+
+
 
 
       {groupLeaderLoggedIn()}

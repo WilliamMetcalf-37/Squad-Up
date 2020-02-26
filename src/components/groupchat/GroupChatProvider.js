@@ -6,13 +6,13 @@ export const GroupChatProvider = (props) => {
     const [groupChats, setGroupChats] = useState([])
 
     const getGroupChats = () => {
-        return fetch("http://localhost:8088/groupChats?_expand=group&_expand=user")
+        return fetch("http://localhost:8088/groupsChats?_expand=group&_expand=user")
             .then(res => res.json())
             .then(setGroupChats)
     }
 
     const addGroupChat = groupChat => {
-        return fetch("http://localhost:8088/groupChats", {
+        return fetch("http://localhost:8088/groupsChats", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -23,7 +23,7 @@ export const GroupChatProvider = (props) => {
     }
 
     const deleteGroupChat = groupChat => {
-        return fetch(`http://localhost:8088/groupChats/${groupChat.id}`, {
+        return fetch(`http://localhost:8088/groupsChats/${groupChat.id}`, {
             method: "DELETE"
         })
             .then(getGroupChats)
@@ -31,7 +31,7 @@ export const GroupChatProvider = (props) => {
 
 
     const updateGroupChat = groupChat => {
-        return fetch(`http://localhost:8088/groupChats/${groupChat.id}`, {
+        return fetch(`http://localhost:8088/groupsChats/${groupChat.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

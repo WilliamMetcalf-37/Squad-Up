@@ -8,12 +8,12 @@ import { UserContext } from "../users/UserProvider";
 
 
 const Login = props => {
- 
 
 
 
 
-    const username= useRef()
+
+    const username = useRef()
     const password = useRef()
     const firstName = useRef()
     const lastName = useRef()
@@ -30,7 +30,7 @@ const Login = props => {
     }
 
     const handleLogin = (e) => {
-        
+
         e.preventDefault()
 
         existingUserCheck()
@@ -58,7 +58,7 @@ const Login = props => {
                             localStorage.setItem("activeUser", response.id)
                             props.history.push("/")
 
-                       
+
 
 
                         })
@@ -70,7 +70,7 @@ const Login = props => {
         <main className="container--login">
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Squad Up!</h1>
+                    <h1>RaveBook</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Username </label>
