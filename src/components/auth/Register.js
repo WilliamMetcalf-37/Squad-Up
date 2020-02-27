@@ -6,8 +6,7 @@ const Register = props => {
     const firstName = useRef()
     const lastName = useRef()
     const username = useRef()
-    const password = useRef()
-    const verifyPassword = useRef()
+
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/customers?username=${username.current.value}`)
@@ -23,32 +22,29 @@ const Register = props => {
     const handleRegister = (e) => {
         e.preventDefault()
 
-        if (password.current.value === verifyPassword.current.value) {
-            existingUserCheck()
-                .then(() => {
-                    fetch("http://localhost:8088/users", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            username: username.current.value,
-                            password: password.current.value,
-                            firstName: firstName.current.value,
-                            lastName: lastName.current.value
-                        })
+
+        existingUserCheck()
+            .then(() => {
+                fetch("http://localhost:8088/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username: username.current.value,
+                        firstName: firstName.current.value,
+                        lastName: lastName.current.value
                     })
-                        .then(_ => _.json())
-                        .then(createdUser => {
-                            if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("activeUser", createdUser.id)
-                                props.history.push("/")
-                            }
-                        })
                 })
-        } else {
-            window.alert("Passwords do not match")
-        }
+                    .then(_ => _.json())
+                    .then(createdUser => {
+                        if (createdUser.hasOwnProperty("id")) {
+                            localStorage.setItem("activeUser", createdUser.id)
+                            props.history.push("/")
+                        }
+                    })
+            })
+
     }
 
     return (
@@ -79,22 +75,7 @@ const Register = props => {
                         placeholder="Username"
                         required />
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
-                    <input ref={password} type="password"
-                        name="password"
-                        className="form-control"
-                        placeholder="Password"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <input ref={verifyPassword} type="password"
-                        name="verifyPassword"
-                        className="form-control"
-                        placeholder="Verify password"
-                        required />
-                </fieldset>
+
                 <fieldset>
                     <button type="submit">
                         Sign in

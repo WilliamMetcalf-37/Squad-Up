@@ -1,10 +1,8 @@
 
-import React, { useRef, useContext } from "react"
+import React, { useRef } from "react"
 import { Link } from "react-router-dom";
 import "./Login.css"
-import { UserGroupContext } from "../groups/UserGroupProvider";
-import { GroupContext } from "../groups/GroupProvider";
-import { UserContext } from "../users/UserProvider";
+
 
 
 const Login = props => {
@@ -14,9 +12,8 @@ const Login = props => {
 
 
     const username = useRef()
-    const password = useRef()
-    const firstName = useRef()
-    const lastName = useRef()
+
+
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?username=${username.current.value}`)
@@ -35,36 +32,17 @@ const Login = props => {
 
         existingUserCheck()
             .then(exists => {
-                if (exists && exists.password === password.current.value) {
-                    localStorage.setItem("activeUser", exists.id)
-                    props.history.push("/")
-                } else if (exists && exists.password !== password.current.value) {
-                    window.alert("Password does not match")
-                } else if (!exists) {
-                    fetch("http://localhost:8088/users", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            username: username.current.value,
-                            password: password.current.value,
-                            firstName: firstName.current.value,
-                            lastName: lastName.current.value
-                        })
-                    })
-                        .then(_ => _.json())
-                        .then(response => {
-                            localStorage.setItem("activeUser", response.id)
-                            props.history.push("/")
+
+                localStorage.setItem("activeUser", exists.id)
+                props.history.push("/")
 
 
 
 
-                        })
-                }
             })
     }
+
+
 
     return (
         <main className="container--login">
@@ -80,14 +58,7 @@ const Login = props => {
                             placeholder="Username"
                             required autoFocus />
                     </fieldset>
-                    <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password"
-                            id="password"
-                            className="form-control"
-                            placeholder="Password"
-                            required />
-                    </fieldset>
+
                     <fieldset>
                         <button type="submit">
                             Sign in
