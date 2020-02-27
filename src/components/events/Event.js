@@ -54,11 +54,7 @@ export default ({ event, history }) => {
 
 
 
-          const patchTheUser = {
-            id: parseInt(localStorage.getItem("activeUser"), 10),
-            groupLength: foundUser.groupLength + 1
-          }
-          patchUser(patchTheUser)
+
           addGroupChat(firstChat)
         }).then(() => {
           window.alert(`You have create a new group at ${event.venue.name} for ${event.artistList[0].name} on ${event.date}`)
